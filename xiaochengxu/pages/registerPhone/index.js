@@ -187,6 +187,7 @@ Page({
           wx.navigateTo({
             url: '../appointmentResult/appointmentResult?orderno=' + d.orderno
             + '&status=0'
+            + '&backlevel=2'
           })
         })
       });

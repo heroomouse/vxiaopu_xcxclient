@@ -11,6 +11,7 @@ Page({
   },
 
   onLoad: function (info) {
+    console.log("我的订单页面")
     this.setData({
       shopid: info.shopid,
       simple: !!info.simple
@@ -54,7 +55,11 @@ Page({
       success: function(res) {
         // success
         console.log(res)
+
         var orderList = res.data.orderlist || [];
+
+        that.data.currentpage = startIndex + orderList.length;
+
         orderList = orderList.filter(function(item) {
           // return item.status == 0;
           //这里处理会使用户无法查看旧预约记录
@@ -68,7 +73,6 @@ Page({
           orderList[i].shortNumber = orderList[i].orderno.substring(orderList[i].orderno.length - 4)
           console.log(orderList[i].detail)
         }
-        that.data.currentpage += orderList.length;
         //刷新数据
         if (startIndex == 1) {
           that.data.orderList = orderList;

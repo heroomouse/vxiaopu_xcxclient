@@ -10,14 +10,15 @@ Page({
   data: {
     shopid: '',
     prodid: '',
-    orderList: []
+    orderList: [],
+    currentpage: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log("理发师订单页面")
     console.log(options)
     if (options.shopid) {
       this.setData({
@@ -35,18 +36,20 @@ Page({
       })
     }
 
-    this.getUserOrders();
+    this.refreshList();
   },
 
   //查询用户预约列表
-  getUserOrders: function () {
+  getOrderList: function (startIndex) {
     var that = this;
     wx.request({
-      url: app.globalData.serverHost + '/api/user/orderquery',
+      url: app.globalData.serverHost + '/api/shop/orderquery',
       data: {
         openid: app.globalData.userOpenID,
         token: app.globalData.session_key,
-        shopid: that.data.shopid
+        shopid: that.data.shopid,
+        pageno: startIndex,
+        pagesize: 30
       },
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       success: function (res) {
@@ -54,6 +57,9 @@ Page({
 
         var orderList = res.data.orderlist;
         var tmpList = [];
+
+        that.data.currentpage = startIndex + orderList.length
+
         for (var i = 0, len = orderList.length; i < len; i++) {
           if (typeof orderList[i].detail == 'string') {
             orderList[i].detail = JSON.parse(orderList[i].detail);
@@ -68,8 +74,18 @@ Page({
           }
         }
 
+        //刷新数据
+        if (startIndex == 1) {
+          that.data.orderList = tmpList;
+        } else {
+          tmpList.forEach(function (item) {
+            that.data.orderList.push(item)
+          })
+        }
+
         that.setData({
-          orderList: tmpList
+          orderList: that.data.orderList,
+          currentpage: that.data.currentpage
         })
       },
       complete: function() {
@@ -205,21 +221,37 @@ Page({
   
   },
 
+  loadMoreList: function () {
+    console.log("loading more data" + this.data.currentpage)
+    this.getOrderList(this.data.currentpage)
+  },
+
+  refreshList: function () {
+    this.setData({
+      currentpage: 1
+    })
+    console.log("reload data" + this.data.currentpage)
+    this.getOrderList(this.data.currentpage)
+  },
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
 
     wx.showNavigationBarLoading()
-
-    this.getUserOrders();
+    
+    this.refreshList();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
+    wx.showNavigationBarLoading()
+
+    this.loadMoreList()
   },
 
   /**

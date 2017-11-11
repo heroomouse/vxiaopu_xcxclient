@@ -7,6 +7,7 @@ Page({
     status: 1,
     orderInfo: {},
     shortNumber: '',
+    backlevel: 1,
     dealStr: '已处理'
   },
   transformTime: function(st) {
@@ -26,6 +27,10 @@ Page({
     // this.data.orderno = options.orderno;
     var shortNumber = options.orderno.substring(options.orderno.length - 4)
     var dealStr = '已处理'
+    var backlevel = options.backlevel
+    if (backlevel == 0) {
+      backlevel = 1
+    }
     var status;
     if (typeof options.status == 'string') {
       status = parseInt(options.status)
@@ -53,6 +58,7 @@ Page({
       status: options.status,
       shortNumber: shortNumber,
       dealStr: dealStr,
+      backlevel: backlevel,
       shopInfo: {
         mobile: app.globalData.currentShop.mobile,
         addr: app.globalData.currentShop.addr
@@ -136,7 +142,7 @@ Page({
   },
 
   tapCancel : function() {
-      wx.navigateBack();  
+    wx.navigateBack(backlevel);
   }    
 
 })
