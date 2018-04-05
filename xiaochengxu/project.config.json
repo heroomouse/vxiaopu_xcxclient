@@ -22,7 +22,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "扫码预约",
+					"pathName": "pages/enterShop/enterShop",
+					"query": "shopid=d8753ccfa54cd1414c07b3740397411443361103"
+				}
+			]
 		}
 	}
 }

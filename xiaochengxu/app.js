@@ -10,28 +10,28 @@ App({
     logs.unshift(Date.now())
     console.log("launch")
     wx.setStorageSync('logs', logs)
-    this.globalData.shops = JSON.parse(this.globalData.jsonData),
-    console.log(this.globalData.shops)
-    var shop;
-    var ware;
-    for(var i = 0;i < this.globalData.shops.shopList.length; i++) {
-      shop = this.globalData.shops.shopList[i];
-      shop.index = i;
-      for(var j = 0;j < shop.wares.length; j++) {
-        ware = shop.wares[j];
-        ware.index = j;
-        for(var k = 0;k < ware.items.length; k++) {
-          console.log("增加orderNum属性");
-          ware.items[k].orderNum = 0;
-          ware.items[k].index = k;
-        }
-      }
-    }
+    // this.globalData.shops = JSON.parse(this.globalData.jsonData),
+    // console.log(this.globalData.shops)
+    // var shop;
+    // var ware;
+    // for(var i = 0;i < this.globalData.shops.shopList.length; i++) {
+    //   shop = this.globalData.shops.shopList[i];
+    //   shop.index = i;
+    //   for(var j = 0;j < shop.wares.length; j++) {
+    //     ware = shop.wares[j];
+    //     ware.index = j;
+    //     for(var k = 0;k < ware.items.length; k++) {
+    //       console.log("增加orderNum属性");
+    //       ware.items[k].orderNum = 0;
+    //       ware.items[k].index = k;
+    //     }
+    //   }
+    // }
 
-    console.log(this.globalData.shops)
+    // console.log(this.globalData.shops)
 
-    this.globalData.currentIndex = 0;
-    this.globalData.currentShop = this.globalData.shops.shopList[0]
+    // this.globalData.currentIndex = 0;
+    // this.globalData.currentShop = this.globalData.shops.shopList[0]
 
     var that = this
     wx.login({
@@ -46,6 +46,7 @@ App({
       console.log("userOpenID changed!");
       console.log(that.globalData.userOpenID);
       that.registerUser();
+      that.getUserInfo();
     });
 
   },
@@ -107,30 +108,56 @@ App({
     })
   },
 
-  // getUserInfo:function(cb){
-  //   var that = this
-  //   if(this.globalData.userInfo){
-  //     typeof cb == "function" && cb(this.globalData.userInfo)
-  //   }else{
-  //     //调用登录接口
-  //     wx.login({
-  //       success: function (res) {
-  //         wx.getUserInfo({
-  //           success: function (res1) {
-  //             that.globalData.userInfo = res1.userInfo
-  //             typeof cb == "function" && cb(that.globalData.userInfo)
-  //           }
-  //         })
-  //       }
-  //     })
-  //   }
-  // },
+  getUserInfo:function(cb){
+    console.log("getUserInfo")
+    console.log(this.globalData.userInfo)
+    var that = this
+    if(this.globalData.userInfo){
+      typeof cb == "function" && cb(this.globalData.userInfo)
+      console.log("I got userInfo!!!")
+    }else{
+      wx.request({
+        url: that.globalData.serverHost + '/api/user/query',
+        data: {
+          openid: that.globalData.userOpenID,
+          token: that.globalData.session_key
+        },
+        method: 'POST',
+        success: function (res) {
+          // success
+          console.log("/api/user/query success");
+          console.log(res.data);
+          var list = res.data.shoplist
+          var shopInfo;
+          for (var index = 0; index < list.length; index++) {
+            shopInfo = list[index];
+            shopInfo.logoList = shopInfo.logo.split("|")
+            // shopInfo.isMyShop = (index % 3 == 0);//是否预约店铺
+          }
+          var pList = [];
+          var plistIndex = 0;
+          that.globalData.shops = list
+          console.log(list);
+          that.globalData.userInfo = res.data;
+        },
+        fail: function (res) {
+          // fail
+          console.log("/api/user/query fail");
+          console.log(res);
+        },
+        complete: function () {
+          // complete
+          typeof cb == "function" && cb(that.globalData.userInfo)
+        }
+      })
+    }
+  },
 
   globalData:{
     serverHost: "https://www.wxpuu.com",//"https://www.ingcloud.net",https://www.wxpuu.com,
     userOpenID: null,
     session_key: null,
-    userInfo: {},
+    userInfo: null,
     currentShopOpenID: "",
     //"oogLjwhPimfaJqGNLr4Kmb_PbKk0",
     currentShopID: "",

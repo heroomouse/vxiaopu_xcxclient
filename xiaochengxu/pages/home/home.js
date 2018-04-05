@@ -42,7 +42,20 @@ console.log(shop,'xxxx')
     })
   },
 
-  getAttentionShopList: function () {
+  getAttentionShopList: function (needRefresh) {
+
+    //之前已经加载过了
+    if (app.globalData.shops && !needRefresh) {
+      console.log("have shop info")
+      this.setData({
+        shopList: app.globalData.shops,
+        currentLoadedShopIndex: 0
+      })
+      return
+    }
+
+    console.log("have no shop info,send quest")
+
     var that = this;
     console.log(app.globalData.userOpenID);
     console.log(app.globalData.session_key);
@@ -156,14 +169,14 @@ console.log(shop,'xxxx')
 
     var that = this
 
-    watch(app.globalData, "hasRegistered", function(){
-      console.log("hasRegistered changed!");
+    watch(app.globalData, "shops", function(){
+      console.log("shops changed!");
       console.log(app.globalData.userOpenID);
-      that.getAttentionShopList();
+      that.getAttentionShopList(false);
     });
 
     if(app.globalData.hasRegistered) {
-      this.getAttentionShopList();
+      this.getAttentionShopList(false);
     }
 
   }
