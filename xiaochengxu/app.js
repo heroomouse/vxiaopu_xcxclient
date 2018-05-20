@@ -37,8 +37,14 @@ App({
     wx.login({
       success: function (res) {
         console.log("get code!!!")
-        console.log(res.code)
+        console.log(res)
         that.getOpenID(res.code)
+
+        wx.getUserInfo({
+          success: function (res) {
+            console.log(res);
+          }
+        })
       }
     })
 
@@ -46,7 +52,7 @@ App({
       console.log("userOpenID changed!");
       console.log(that.globalData.userOpenID);
       that.registerUser();
-      that.getUserInfo();
+      that.getCustomerInfo();
     });
 
   },
@@ -108,9 +114,15 @@ App({
     })
   },
 
-  getUserInfo:function(cb){
-    console.log("getUserInfo")
+  getCustomerInfo:function(cb){
+    console.log("getCustomerInfo")
     console.log(this.globalData.userInfo)
+
+    var data = {
+      openid: this.globalData.userOpenID,
+      token: this.globalData.session_key
+    };
+    console.log(data);
     var that = this
     if(this.globalData.userInfo){
       typeof cb == "function" && cb(this.globalData.userInfo)

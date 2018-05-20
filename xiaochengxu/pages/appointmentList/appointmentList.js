@@ -17,7 +17,13 @@ Page({
     showItem: {},
     showWareIndex: 0,
     showItemIndex: 0,
-    totalPrice: 0
+    totalPrice: 0,
+    //页面类型
+    //0 普通
+    //1 支付
+    pageType: 0,
+    btnTitle: "预约",
+    btnClickAction: null
   },
   //事件处理函数
   bindViewTap: function() {
@@ -44,6 +50,10 @@ Page({
 
     var n = that.random(0, that.data.productList.length);
     that.orderBarberAction(that.data.productList[n]);   
+  },
+
+  buttonAction(data) {
+    this.data.btnClickAction(data);
   },
 
   appointItem(data) {
@@ -81,6 +91,14 @@ Page({
         }
       }
     })  
+  },
+
+  paymentTap: function(event) {
+    console.log(event);
+    //传入shopid和理发师id
+    wx.navigateTo({
+      url: '../pay/index?shopid=' + app.globalData.currentShopID + '&shopname=' + app.globalData.currentShop.name + '&productid=' + event.currentTarget.dataset.item.prodid + '&name=' + event.currentTarget.dataset.item.name + '&header=' + event.currentTarget.dataset.item.image
+    });
   },
 
   appointmentTap: function(event) {
@@ -412,12 +430,15 @@ Page({
   },
 
   onLoad: function (info) {
-    console.log('onLoad');
-    console.log('info1234'+info);
+    console.log('enter shop product list page');
+    console.log('input = '+info);
     var that = this;
 
+    var btnTitle = "预约";
+    var btnClickAction = this.paymentTap;
+    var pageType = 0;
+
     if (info) {
-      console.log('!!!!!!!!!!!!!');
       if (info.shopid) {
         app.globalData.currentShopID = info.shopid;
       }
@@ -425,7 +446,27 @@ Page({
       if (info.shopopenid) {
         app.globalData.currentShopOpenID = info.shopopenid;
       }
+
+      if (info.pagetype) {
+        pageType = info.pagetype;
+        switch (pageType) {
+          case 0:
+            btnTitle = "预约";
+            btnClickAction = this.appointmentTap;
+          break;
+          case 1:
+            btnTitle = "支付";
+            btnClickAction = this.paymentTap;
+          break;
+        }
+      }
     }
+
+    this.setData({
+      pageType: pageType,
+      btnTitle: btnTitle,
+      btnClickAction: btnClickAction,
+    })
 
     //获取店铺商品分类
     // if (app.globalData.currentShopOpenID != app.globalData.lastShopOpenID ||

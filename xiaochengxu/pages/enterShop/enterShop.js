@@ -110,6 +110,8 @@ Page({
   },
 
   checkUserIDAndSwitchPage : function() {
+
+    var that = this;
     //查询用户身份
     wx.request({
       url: app.globalData.serverHost + '/api/user/shopidentifyquery',

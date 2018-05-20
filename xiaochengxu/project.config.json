@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.4",
-	"appid": "wx3798b69011ebbf2c",
-	"projectname": "%E5%89%AA%E7%BA%A6",
+	"appid": "wx55330991a9560243",
+	"projectname": "%E5%89%AA%E7%BA%A6%E6%94%AF%E4%BB%98%E8%B0%83%E8%AF%95%E7%89%881",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -28,6 +28,18 @@
 					"name": "扫码预约",
 					"pathName": "pages/enterShop/enterShop",
 					"query": "shopid=d8753ccfa54cd1414c07b3740397411443361103"
+				},
+				{
+					"id": 1,
+					"name": "我的店铺",
+					"pathName": "pages/enterShop/enterShop",
+					"query": "shopid=7086b7f20b80e980fd519770c98629125fe3641b"
+				},
+				{
+					"id": -1,
+					"name": "注册理发师",
+					"pathName": "pages/registerEmployee/index",
+					"query": "shopid=7086b7f20b80e980fd519770c98629125fe3641b"
 				}
 			]
 		}

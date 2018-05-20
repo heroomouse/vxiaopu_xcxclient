@@ -1,0 +1,120 @@
+<!--我的订单-->
+<view class="container">
+    <view class="wrap payorder-wrap">
+     <view class='weui-cells'>
+                  <view class="weui-cell">
+                   <view class="weui-cell__hd">
+                       <text class='title'>理发师</text>
+                       <text>1号-张三</text>
+                     </view>
+                     <view class="weui-cell__bd">
+                       <text class='title'>累计收款笔数</text>
+                       <text>1</text>
+                     </view>
+                      <view class="weui-cell__ft">
+                        <text class='title'>累计收款金额</text>
+                        <text>¥68.00</text>
+                      </view>
+                   </view>
+                </view>
+<!--循环订单列表-->
+    <block>
+        <view class="order-item">
+      <view class='weui-cells__title'>2017年6月12日</view>
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class='weui-cells'>
+                  <view class="weui-cell">
+                     <view class="weui-cell__bd">
+                       <text class='title'>收款笔数</text>
+                       <text>1</text>
+                     </view>
+                      <view class="weui-cell__ft">
+                        <text class='title'>合计</text>
+                        <text>¥68.00</text>
+                      </view>
+                   </view>
+                </view>
+            </view>
+            <view  class="weui-form-preview__bd">
+            
+                   <view class="table">
+                    
+                         <view class="tr">
+                           <view class='td'>#1</view>
+                           <view  class="td">李先生</view>
+                           <view class="td">15:23:00</view>
+                           <view  class="td"><em>85:00</em></view>
+                        </view>
+                        
+                         <view class="tr">
+                           <view class='td'>#1</view>
+                           <view  class="td">李先生</view>
+                           <view class="td">15:23:00</view>
+                           <view  class="td"><em>85:00</em></view>
+                        </view>
+                          <view class="tr">
+                           <view class='td'>#1</view>
+                           <view  class="td">李先生</view>
+                           <view class="td">15:23:00</view>
+                           <view  class="td"><em>85:00</em></view>
+                        </view>
+                    
+                   </view>
+               
+            </view>
+    
+        </view>
+      </view>
+          <view class="order-item">
+      <view class='weui-cells__title'>2017年6月12日</view>
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class='weui-cells style1'>
+                  <view class="weui-cell">
+                   <view class="weui-cell__hd">
+                       <text class='title'>理发师人数</text>
+                       <text>1</text>
+                     </view>
+                     <view class="weui-cell__bd">
+                       <text class='title'>收款笔数</text>
+                       <text>1</text>
+                     </view>
+                      <view class="weui-cell__ft">
+                        <text class='title'>合计</text>
+                        <text>¥68.00</text>
+                      </view>
+                   </view>
+                </view>
+            </view>
+            <view  class="weui-form-preview__bd">
+            
+                   <view class="table style1">
+                    
+                         <view class="tr">
+                           <view class='td'>理发师1</view>
+                           <view  class="td">10</view>
+                           <view  class="td"><em>200</em></view>
+                        </view>
+
+                         <view class="tr">
+                           <view class='td'>理发师1</view>
+                           <view  class="td">10</view>
+                           <view  class="td"><em>200</em></view>
+                        </view>
+
+                         <view class="tr">
+                           <view class='td'>理发师1</view>
+                           <view  class="td">10</view>
+                           <view  class="td"><em>200</em></view>
+                        </view>
+                    
+                   </view>
+               
+            </view>
+        
+        </view>
+      </view>
+    </block>
+    </view>
+</view>

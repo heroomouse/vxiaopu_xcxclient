@@ -1,0 +1,37 @@
+<!--pages/pay/index.wxml-->
+<view class="container">
+<view class='wrap pay-wrap'>
+   <view class="page-bd">
+          <view class="paywrap-hd">
+            <view class="weui-cells">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                     <text class="title">付款给-{{shopname}}</text>
+                     <text>{{name}}</text>
+                </view>
+                <view class="weui-cell__ft">
+                <image src="{{header}}"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='paywrap-bd'>   
+            <view class="weui-cells weui-cells_form">
+            <div class="weui-cells__title">金额</div>
+              <view class="weui-cell">
+                <view class="weui-cell__hd"><label class="weui-label">¥</label></view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput="priceinput" type="number" pattern="[0-9]*" placeholder="请输入金额"></input>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="paywrap-ft">
+           <view class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" bindtap='questPayOrder'>付款</button> 
+           </view>
+          </view>
+      </view>
+
+  </view>
+</view>

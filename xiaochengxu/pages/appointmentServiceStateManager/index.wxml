@@ -13,6 +13,17 @@
           </view>
         </view>
       </view>
+      <view class="weui-cells weui-cells_radio">
+        <view class="weui-cell weui-check__label" for="x11" catchtap="gotoOrderPage" data-isinwork="{{0}}">
+          <view class="weui-cell__bd">
+            <view>收款记录</view>
+          </view>
+          <!-- <view wx:if="{{status==0}}" class="weui-cell__ft"> -->
+            <!-- <input type="radio" class="weui-check" name="radio1" id="x11" /> -->
+            <view font-size="9px">累计 1000笔 ></view>
+          <!-- </view> -->
+        </view>
+      </view>
       <view class="weui-cells__title">上班状态</view>
       <view class="weui-cells weui-cells_radio">
         <view class="weui-cell weui-check__label" for="x11" catchtap="changeStatus" data-isinwork="{{0}}">
