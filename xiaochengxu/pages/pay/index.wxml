@@ -21,7 +21,7 @@
               <view class="weui-cell">
                 <view class="weui-cell__hd"><label class="weui-label">¥</label></view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" bindinput="priceinput" type="number" pattern="[0-9]*" placeholder="请输入金额"></input>
+                    <input class="weui-input" bindinput="priceinput" type="digit" placeholder="请输入金额"></input>
                 </view>
               </view>
             </view>

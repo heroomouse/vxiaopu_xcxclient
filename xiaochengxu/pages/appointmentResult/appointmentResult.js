@@ -142,7 +142,7 @@ Page({
   },
 
   tapCancel : function() {
-    wx.navigateBack(backlevel);
+    wx.navigateBack(this.data.backlevel);
   }    
 
 })

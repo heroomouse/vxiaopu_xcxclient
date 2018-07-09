@@ -265,7 +265,8 @@ Page({
   //查询用户是否已经预约过
   checkUserOrders: function(item, callback) {
     var that = this;
-    //获取店铺商品列表
+    console.log('获取预约列表');
+    //获取预约列表
     wx.request({
       url: app.globalData.serverHost + '/api/user/orderquery',
       data: {
@@ -431,7 +432,7 @@ Page({
 
   onLoad: function (info) {
     console.log('enter shop product list page');
-    console.log('input = '+info);
+    console.log('input = ',info);
     var that = this;
 
     var btnTitle = "预约";
@@ -448,7 +449,7 @@ Page({
       }
 
       if (info.pagetype) {
-        pageType = info.pagetype;
+        pageType = Number(info.pagetype);
         switch (pageType) {
           case 0:
             btnTitle = "预约";

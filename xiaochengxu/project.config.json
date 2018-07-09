@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.4",
-	"appid": "wx55330991a9560243",
-	"projectname": "%E5%89%AA%E7%BA%A6%E6%94%AF%E4%BB%98%E8%B0%83%E8%AF%95%E7%89%881",
+	"appid": "wxddbb9a5ab0cee459",
+	"projectname": "%E4%B8%9D%E8%89%BA",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -40,6 +40,12 @@
 					"name": "注册理发师",
 					"pathName": "pages/registerEmployee/index",
 					"query": "shopid=7086b7f20b80e980fd519770c98629125fe3641b"
+				},
+				{
+					"id": 3,
+					"name": "扫码支付",
+					"pathName": "pages/enterShop/enterShop",
+					"query": "shopid=7086b7f20b80e980fd519770c98629125fe3641b&pagetype=1"
 				}
 			]
 		}

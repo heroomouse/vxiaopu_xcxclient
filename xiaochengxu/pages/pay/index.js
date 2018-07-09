@@ -142,7 +142,8 @@ Page({
         token: app.globalData.session_key,
         shopid: app.globalData.currentShopID,
         prodid: that.data.productid,
-        price: that.data.price,
+        price: that.data.price * 100,
+        mobile: app.globalData.userInfo.mobile,
         nickname: 'mouse'
       },
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -156,7 +157,9 @@ Page({
             title: '付款失败,请重试',
             image: '../../image/xx.png',
           })
+          return;
         }
+        var orderno = res.data.orderno
         wx.requestPayment({
           timeStamp: res.data.timeStamp,
           nonceStr: res.data.nonceStr,
@@ -164,6 +167,8 @@ Page({
           signType: res.data.signType,
           paySign: res.data.paySign,
           'success': function (res) {
+            console.log(res)
+            // that.payCompleteNotify(orderno)
             wx.showToast({
               title: '付款成功',
             })
@@ -191,15 +196,15 @@ Page({
   },
 
   /**
-   * 请求预订单
+   * 支付完成后台通知
    */
-  payCompleteNotify: function (e) {
+  payCompleteNotify: function (orderNumber) {
     var that = this
-    //获取当前理发师收款记录
+    //支付完成后台通知
     wx.request({
-      url: app.globalData.serverHost + '/api/pay/',
+      url: app.globalData.serverHost + '/api/pay/complete',
       data: {
-        
+        orderno: orderNumber
       },
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header

@@ -9,7 +9,8 @@ Page({
   data: {
     error: 0,
     errorMsg: "",
-    shopid: ""
+    shopid: "",
+    shopPageType: 0
   },
 
   onLoad: function (info) {
@@ -33,6 +34,10 @@ Page({
         }
         
       }
+
+      if (info.pagetype) {
+        this.data.shopPageType = info.pagetype;
+      }
     }
   },
 
@@ -42,7 +47,7 @@ Page({
 
     this.attentShop()
 
-    this.checkUserIDAndSwitchPage()
+    // this.checkUserIDAndSwitchPage()
   },
 
   loadShopInfo: function () {
@@ -72,6 +77,8 @@ Page({
         that.setData({
           shop: app.globalData.currentShop
         })
+
+        that.checkUserIDAndSwitchPage()
       },
       fail: function () {
         // fail
@@ -175,7 +182,7 @@ Page({
           })
         } else {
           wx.redirectTo({
-            url: '../appointmentList/appointmentList?shopid=' + app.globalData.currentShopID,
+            url: '../appointmentList/appointmentList?shopid=' + app.globalData.currentShopID + '&pagetype=' + that.data.shopPageType
           })
         }
 

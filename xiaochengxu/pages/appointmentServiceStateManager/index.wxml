@@ -20,7 +20,7 @@
           </view>
           <!-- <view wx:if="{{status==0}}" class="weui-cell__ft"> -->
             <!-- <input type="radio" class="weui-check" name="radio1" id="x11" /> -->
-            <view font-size="9px">累计 1000笔 ></view>
+            <view font-size="9px"> ></view>
           <!-- </view> -->
         </view>
       </view>
